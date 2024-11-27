@@ -3,6 +3,8 @@
 This repository contains the **GitHub Activity Mapper**, a tool and associated data mappings for transforming raw GitHub event data into structured actions and high-level activities. This package serves as a replication resource for research purposes, specifically to support analyses of open-source software (OSS) collaboration.
 
 ## Repository Structure
+
+```
 .
 ├── LICENSE                     # License information
 ├── data/                       # Sample datasets for testing and demonstration
@@ -19,6 +21,7 @@ This repository contains the **GitHub Activity Mapper**, a tool and associated d
 │   ├── event-preprocessing.ipynb      # Notebook for preprocessing GitHub events
 │   ├── numfocus-gh-events-query.ipynb # Notebook for querying NumFocus GitHub events
 └── requirements.txt           # Dependencies required to run the code
+```
 
 ## Getting Started
 
