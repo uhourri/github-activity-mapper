@@ -295,7 +295,44 @@ The **Action-to-Activity Mapping** is the second step in structuring GitHub cont
 
 Actions, derived from the Event-to-Action Mapping process, serve as the input for this stage. These actions are structured JSON objects containing metadata and detailed attributes. For example:
 
-[action example]
+```json
+{
+   "action":"CloseIssue",
+   "event_id":"26163458157",
+   "date":"2023-01-01T00:06:24Z",
+   "actor":{
+      "id":15819577,
+      "login":"mem48"
+   },
+   "repository":{
+      "id":153765492,
+      "name":"ropensci/opentripplanner",
+      "organisation":"ropensci",
+      "organisation_id":1200269
+   },
+   "details":{
+      "issue":{
+         "id":755698614,
+         "number":78,
+         "title":"r5",
+         "state":"closed",
+         "author":{
+            "id":15819577,
+            "login":"mem48"
+         },
+         "labels":[
+            {
+               "name":"enhancement",
+               "description":"New feature or request"
+            }
+         ],
+         "created_date":"2020-12-02T23:54:39Z",
+         "updated_date":"2023-01-01T00:06:23Z",
+         "closed_date":"2023-01-01T00:06:23Z"
+      }
+   }
+}
+```
 
 #### 2. Mapping Definition
 
