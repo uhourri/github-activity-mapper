@@ -60,8 +60,69 @@ Clean and prepare raw GitHub event data for mapping using the `notebooks/event-p
 ### 3. Mapping GitHub Events to Actions
 Use the schema defined in `mapping/event-action-mapping.json` to transform raw GitHub events into granular actions. The process is demonstrated in the `notebooks/event-action-mapping.ipynb` notebook.
 
-### 4. Mapping Actions to Activities
-Aggregate related actions into high-level activities using the schema in `mapping/action-activity-mapping.json`. Refer to the `notebooks/action-activity-mapping.ipynb` notebook for an implementation example.
+The **Event-to-Action Mapping** is the first step in transforming raw GitHub events into structured and standardized actions. This process establishes a one-to-one correspondence between GitHub event types and meaningful actions that represent specific contributor operations. The mapping leverages the metadata in each event’s payload to determine the action type and extract relevant details.
+
+#### Mapping Process
+
+##### 1. Raw GitHub Event
+
+A GitHub event represents an action taken by a contributor on the platform. Events are unstructured JSON objects containing various attributes, including the event type, metadata, and payload. For example:
+
+```[EXAMPLE]```
+
+##### 2. Mapping Definition
+
+The mapping file defines rules to translate the raw event into a structured action. These rules specify:
+	•	The event type (PullRequestEvent).
+	•	Optional payload conditions ("action": "closed" and "merged": true).
+	•	Fields to extract and include in the resulting action.
+
+Mapping for the MergePullRequest action is defined as follows:
+```[EXAMPLE]```
+
+##### 3. Resulting Action
+
+The raw event is transformed into a structured action. Common fields (e.g., event_id, actor, repository) and action-specific details (e.g., pull_request metadata) are included:
+
+```
+
+{
+   "action":"CloseIssue",
+   "event_id":"26170139709",
+   "date":"2023-01-01T20:19:58Z",
+   "actor":{
+      "id":1282691,
+      "login":"KristofferC"
+   },
+   "repository":{
+      "id":1644196,
+      "name":"JuliaLang/julia",
+      "organisation":"JuliaLang",
+      "organisation_id":743164
+   },
+   "details":{
+      "issue":{
+         "id":1515182791,
+         "number":48062,
+         "title":"Bad default number of BLAS threads on 1.9?",
+         "state":"closed",
+         "author":{
+            "id":1282691,
+            "login":"KristofferC"
+         },
+         "labels":[
+            {
+               "name":"linear algebra",
+               "description":"Linear algebra"
+            }
+         ],
+         "created_date":"2022-12-31T18:49:47Z",
+         "updated_date":"2023-01-01T20:19:58Z",
+         "closed_date":"2023-01-01T20:19:57Z"
+      }
+   }
+}
+```
 
 
 ## Sample Data
