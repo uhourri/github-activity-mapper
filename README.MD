@@ -2,6 +2,8 @@
 
 This repository contains the **GitHub Activity Mapper**, a tool and associated data mappings for transforming raw GitHub event data into structured actions and high-level activities. This package serves as a replication resource for research purposes, specifically to support analyses of open-source software (OSS) collaboration.
 
+For the complete NumFocus dataset, including actions and activities spanning 21 months (January 2023 to September 2024) across 58 open-source projects, please refer to the [NumFocus Dataset on Zenodo](https://tinyurl.com/github-activity-dataset).
+
 ## Repository Structure
 
 ```
@@ -465,8 +467,6 @@ Sample datasets are provided in the `data/` directory:
 - `sample-events.json`: Preprocessed GitHub event data.
 - `sample-actions.jsonl`: Mapped actions.
 - `sample-activities.jsonl`: High-level activities.
-
-For the complete NumFocus dataset, including actions and activities spanning 21 months (January 2023 to September 2024) across 58 open-source projects, please refer to the [NumFocus Dataset on Zenodo](https://tinyurl.com/github-activity-dataset).
 
 ## Contributing
 
