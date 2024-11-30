@@ -78,7 +78,7 @@ The mapping file defines rules to translate the raw event into a structured acti
 	•	Fields to extract and include in the resulting action.
 
 Mapping for the MergePullRequest action is defined as follows:
-```
+```json
 "CloseIssue":{
    "event":{
       "type":"IssuesEvent",
