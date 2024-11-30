@@ -78,7 +78,40 @@ The mapping file defines rules to translate the raw event into a structured acti
 	•	Fields to extract and include in the resulting action.
 
 Mapping for the MergePullRequest action is defined as follows:
-```[EXAMPLE]```
+```
+"CloseIssue":{
+   "event":{
+      "type":"IssuesEvent",
+      "payload":{
+         "action":"closed"
+      }
+   },
+   "attributes":{
+      "include_common_fields":true,
+      "details":{
+         "issue":{
+            "id":"payload.issue.id",
+            "number":"payload.issue.number",
+            "title":"payload.issue.title",
+            "state":"payload.issue.state",
+            "author":{
+               "id":"payload.issue.user.id",
+               "login":"payload.issue.user.login"
+            },
+            "labels":[
+               {
+                  "name":"payload.issue.labels.name",
+                  "description":"payload.issue.labels.description"
+               }
+            ],
+            "created_date":"payload.issue.created_at",
+            "updated_date":"payload.issue.updated_at",
+            "closed_date":"payload.issue.closed_at"
+         }
+      }
+   }
+}
+```
 
 ##### 3. Resulting Action
 
