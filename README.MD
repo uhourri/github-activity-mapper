@@ -68,7 +68,139 @@ The **Event-to-Action Mapping** is the first step in transforming raw GitHub eve
 
 A GitHub event represents an action taken by a contributor on the platform. Events are unstructured JSON objects containing various attributes, including the event type, metadata, and payload. For example:
 
-```[EXAMPLE]```
+```json
+{
+   "type":"IssuesEvent",
+   "public":true,
+   "payload":{
+      "action":"closed",
+      "issue":{
+         "url":"https://api.github.com/repos/JuliaLang/julia/issues/48062",
+         "repository_url":"https://api.github.com/repos/JuliaLang/julia",
+         "labels_url":"https://api.github.com/repos/JuliaLang/julia/issues/48062/labels{/name}",
+         "comments_url":"https://api.github.com/repos/JuliaLang/julia/issues/48062/comments",
+         "events_url":"https://api.github.com/repos/JuliaLang/julia/issues/48062/events",
+         "html_url":"https://github.com/JuliaLang/julia/issues/48062",
+         "id":1515182791,
+         "node_id":"I_kwDOABkWpM5aT9rH",
+         "number":48062,
+         "title":"Bad default number of BLAS threads on 1.9?",
+         "user":{
+            "login":"KristofferC",
+            "id":1282691,
+            "node_id":"MDQ6VXNlcjEyODI2OTE=",
+            "avatar_url":"https://avatars.githubusercontent.com/u/1282691?v=4",
+            "url":"https://api.github.com/users/KristofferC",
+            "html_url":"https://github.com/KristofferC",
+            "followers_url":"https://api.github.com/users/KristofferC/followers",
+            "following_url":"https://api.github.com/users/KristofferC/following{/other_user}",
+            "gists_url":"https://api.github.com/users/KristofferC/gists{/gist_id}",
+            "starred_url":"https://api.github.com/users/KristofferC/starred{/owner}{/repo}",
+            "subscriptions_url":"https://api.github.com/users/KristofferC/subscriptions",
+            "organizations_url":"https://api.github.com/users/KristofferC/orgs",
+            "repos_url":"https://api.github.com/users/KristofferC/repos",
+            "events_url":"https://api.github.com/users/KristofferC/events{/privacy}",
+            "received_events_url":"https://api.github.com/users/KristofferC/received_events",
+            "type":"User",
+            "site_admin":false
+         },
+         "labels":[
+            {
+               "id":61807486,
+               "node_id":"MDU6TGFiZWw2MTgwNzQ4Ng==",
+               "url":"https://api.github.com/repos/JuliaLang/julia/labels/linear%20algebra",
+               "name":"linear algebra",
+               "color":"f2b3db",
+               "default":false,
+               "description":"Linear algebra"
+            }
+         ],
+         "state":"closed",
+         "locked":false,
+         "assignee":null,
+         "assignees":[
+            
+         ],
+         "milestone":{
+            "url":"https://api.github.com/repos/JuliaLang/julia/milestones/44",
+            "html_url":"https://github.com/JuliaLang/julia/milestone/44",
+            "labels_url":"https://api.github.com/repos/JuliaLang/julia/milestones/44/labels",
+            "id":7729972,
+            "node_id":"MI_kwDOABkWpM4AdfM0",
+            "number":44,
+            "title":"1.9",
+            "description":"",
+            "creator":{
+               "login":"vtjnash",
+               "id":330950,
+               "node_id":"MDQ6VXNlcjMzMDk1MA==",
+               "avatar_url":"https://avatars.githubusercontent.com/u/330950?v=4",
+               "url":"https://api.github.com/users/vtjnash",
+               "html_url":"https://github.com/vtjnash",
+               "followers_url":"https://api.github.com/users/vtjnash/followers",
+               "following_url":"https://api.github.com/users/vtjnash/following{/other_user}",
+               "gists_url":"https://api.github.com/users/vtjnash/gists{/gist_id}",
+               "starred_url":"https://api.github.com/users/vtjnash/starred{/owner}{/repo}",
+               "subscriptions_url":"https://api.github.com/users/vtjnash/subscriptions",
+               "organizations_url":"https://api.github.com/users/vtjnash/orgs",
+               "repos_url":"https://api.github.com/users/vtjnash/repos",
+               "events_url":"https://api.github.com/users/vtjnash/events{/privacy}",
+               "received_events_url":"https://api.github.com/users/vtjnash/received_events",
+               "type":"User",
+               "site_admin":false
+            },
+            "open_issues":12,
+            "closed_issues":68,
+            "state":"open",
+            "created_at":"2022-03-02T19:34:37Z",
+            "updated_at":"2023-01-01T20:19:58Z",
+            "due_on":null,
+            "closed_at":null
+         },
+         "comments":1,
+         "created_at":"2022-12-31T18:49:47Z",
+         "updated_at":"2023-01-01T20:19:58Z",
+         "closed_at":"2023-01-01T20:19:57Z",
+         "author_association":"MEMBER",
+         "body":"Something looks strange with the number of BLAS threads on 1.9, I think.\n\n```julia\njulia> VERSION\nv\"1.9.0-beta2\"\n\njulia> LinearAlgebra.BLAS.get_num_threads()\n1\n```\n\n```julia\njulia> VERSION\nv\"1.8.4\"\n\njulia> LinearAlgebra.BLAS.get_num_threads()\n8\n```\n\nThis should just be with everything default.\n\ncc @staticfloat",
+         "reactions":{
+            "url":"https://api.github.com/repos/JuliaLang/julia/issues/48062/reactions",
+            "total_count":0,
+            "+1":0,
+            "-1":0,
+            "laugh":0,
+            "hooray":0,
+            "confused":0,
+            "heart":0,
+            "rocket":0,
+            "eyes":0
+         },
+         "timeline_url":"https://api.github.com/repos/JuliaLang/julia/issues/48062/timeline",
+         "performed_via_github_app":null,
+         "state_reason":"completed"
+      }
+   },
+   "repo":{
+      "id":1644196,
+      "name":"JuliaLang/julia",
+      "url":"https://api.github.com/repos/JuliaLang/julia"
+   },
+   "actor":{
+      "id":1282691,
+      "login":"KristofferC",
+      "avatar_url":"https://avatars.githubusercontent.com/u/1282691?",
+      "url":"https://api.github.com/users/KristofferC"
+   },
+   "org":{
+      "id":743164,
+      "login":"JuliaLang",
+      "avatar_url":"https://avatars.githubusercontent.com/u/743164?",
+      "url":"https://api.github.com/orgs/JuliaLang"
+   },
+   "created_at":1672604398000,
+   "id":"26170139709"
+}
+```
 
 ##### 2. Mapping Definition
 
