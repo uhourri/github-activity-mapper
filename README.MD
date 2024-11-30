@@ -342,10 +342,37 @@ The mapping file defines the logic for grouping actions into activities. It spec
 - Optional actions that may provide additional context (e.g., CreateIssueComment).
 - Validation rules to ensure logical consistency (e.g., matching issue numbers between actions).
 
-Mapping for the CloseIssue activity includes:
-- **Primary action**: CloseIssue, which is mandatory and non-repeating.
-- **Optional action**: CreateIssueComment, which can add context but is not required.
-- **Validation rule**: Ensures the issue number matches between the CloseIssue and any associated CreateIssueComment actions.
+Mapping for the CloseIssue action is defined as follows:
+
+```json
+{
+   "name":"CloseIssue",
+   "time_window":"3s",
+   "actions":[
+      {
+         "action":"CloseIssue",
+         "optional":false,
+         "repeat":false
+      },
+      {
+         "action":"CreateIssueComment",
+         "optional":true,
+         "repeat":false,
+         "validate_with":[
+            {
+               "target_action":"CloseIssue",
+               "fields":[
+                  {
+                     "field":"issue.number",
+                     "target_field":"issue.number"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}
+```
 
 #### 3. Resulting Activity
 
