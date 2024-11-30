@@ -60,11 +60,9 @@ Clean and prepare raw GitHub event data for mapping using the `notebooks/event-p
 ### 3. Mapping GitHub Events to Actions
 Use the schema defined in `mapping/event-action-mapping.json` to transform raw GitHub events into granular actions. The process is demonstrated in the `notebooks/event-action-mapping.ipynb` notebook.
 
-The **Event-to-Action Mapping** is the first step in transforming raw GitHub events into structured and standardized actions. This process establishes a one-to-one correspondence between GitHub event types and meaningful actions that represent specific contributor operations. The mapping leverages the metadata in each event’s payload to determine the action type and extract relevant details.
+The **Event-to-Action Mapping** is the first step in transforming raw GitHub events into structured and standardized actions. This process establishes a one-to-one correspondence between GitHub event types and meaningful actions that represent specific contributor operations. The mapping leverages the metadata in each event’s payload to determine the action type and extract relevant details. with this mapping process :
 
-#### Mapping Process
-
-##### 1. Raw GitHub Event
+#### 1. Raw GitHub Event
 
 A GitHub event represents an action taken by a contributor on the platform. Events are unstructured JSON objects containing various attributes, including the event type, metadata, and payload. For example:
 
@@ -202,14 +200,14 @@ A GitHub event represents an action taken by a contributor on the platform. Even
 }
 ```
 
-##### 2. Mapping Definition
+#### 2. Mapping Definition
 
 The mapping file defines rules to translate the raw event into a structured action. These rules specify:
 - The event type (IssuesEvent).
 - Optional payload conditions ("action": "closed").
 - Fields to extract and include in the resulting action.
 
-Mapping for the MergePullRequest action is defined as follows:
+Mapping for the CloseIssue action is defined as follows:
 ```json
 "CloseIssue":{
    "event":{
@@ -245,7 +243,7 @@ Mapping for the MergePullRequest action is defined as follows:
 }
 ```
 
-##### 3. Resulting Action
+#### 3. Resulting Action
 
 The raw event is transformed into a structured action. Common fields (e.g., event_id, actor, repository) and action-specific details (e.g., issue metadata) are included:
 
@@ -287,7 +285,114 @@ The raw event is transformed into a structured action. Common fields (e.g., even
    }
 }
 ```
+### 4. Mapping Actions to Activities
 
+Use the schema defined in `mapping/action-activity-mapping.json` to aggregate granular actions into high-level activities. This process is demonstrated in the `notebooks/action-activity-mapping.ipynb` notebook.
+
+The **Action-to-Activity Mapping** is the second step in structuring GitHub contributor data. It builds on the Event-to-Action Mapping by grouping related actions into cohesive representations of high-level contributor tasks. Activities encapsulate the broader intent behind individual operations, making them valuable for understanding collaboration and task workflows. with the following mapping precess
+
+#### 1. Actions as Input
+
+Actions, derived from the Event-to-Action Mapping process, serve as the input for this stage. These actions are structured JSON objects containing metadata and detailed attributes. For example:
+
+[action example]
+
+#### 2. Mapping Definition
+
+The mapping file defines the logic for grouping actions into activities. It specifies:
+- The activity type (e.g., CloseIssue).
+- Required actions that must occur to form the activity (e.g., CloseIssue).
+- Optional actions that may provide additional context (e.g., CreateIssueComment).
+- Validation rules to ensure logical consistency (e.g., matching issue numbers between actions).
+
+Mapping for the CloseIssue activity includes:
+- **Primary action**: CloseIssue, which is mandatory and non-repeating.
+- **Optional action**: CreateIssueComment, which can add context but is not required.
+- **Validation rule**: Ensures the issue number matches between the CloseIssue and any associated CreateIssueComment actions.
+
+#### 3. Resulting Activity
+
+A set of related actions is aggregated into a single activity. Each activity record contains:
+- Common fields (e.g., start_date, end_date, actor, repository).
+- The list of actions that make up the activity, maintaining traceability to the original operations.
+
+```json
+{
+   "activity":"CloseIssue",
+   "start_date":"2023-01-01T00:06:24Z",
+   "end_date":"2023-01-01T00:06:24Z",
+   "actor":{
+      "id":15819577,
+      "login":"mem48"
+   },
+   "repository":{
+      "id":153765492,
+      "name":"ropensci/opentripplanner",
+      "organisation":"ropensci",
+      "organisation_id":1200269
+   },
+   "actions":[
+      {
+         "action":"CloseIssue",
+         "event_id":"26163458157",
+         "date":"2023-01-01T00:06:24Z",
+         "details":{
+            "issue":{
+               "id":755698614,
+               "number":78,
+               "title":"r5",
+               "state":"closed",
+               "author":{
+                  "id":15819577,
+                  "login":"mem48"
+               },
+               "labels":[
+                  {
+                     "name":"enhancement",
+                     "description":"New feature or request"
+                  }
+               ],
+               "created_date":"2020-12-02T23:54:39Z",
+               "updated_date":"2023-01-01T00:06:23Z",
+               "closed_date":"2023-01-01T00:06:23Z"
+            }
+         }
+      },
+      {
+         "action":"CreateIssueComment",
+         "event_id":"26163458136",
+         "date":"2023-01-01T00:06:24Z",
+         "details":{
+            "issue":{
+               "id":755698614,
+               "number":78,
+               "title":"r5",
+               "state":"closed",
+               "author":{
+                  "id":15819577,
+                  "login":"mem48"
+               },
+               "labels":[
+                  {
+                     "name":"enhancement",
+                     "description":"New feature or request"
+                  }
+               ],
+               "created_date":"2020-12-02T23:54:39Z",
+               "updated_date":"2023-01-01T00:06:23Z",
+               "closed_date":"2023-01-01T00:06:23Z"
+            },
+            "comment":{
+               "id":1368298302,
+               "position":1
+            }
+         }
+      }
+   ]
+}
+```
+
+This step bridges the gap between granular operations and high-level task representations, enabling nuanced insights into contributor workflows.
 
 ## Sample Data
 
