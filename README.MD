@@ -73,8 +73,8 @@ A GitHub event represents an action taken by a contributor on the platform. Even
 ##### 2. Mapping Definition
 
 The mapping file defines rules to translate the raw event into a structured action. These rules specify:
-- The event type (PullRequestEvent).
-- Optional payload conditions ("action": "closed" and "merged": true).
+- The event type (IssuesEvent).
+- Optional payload conditions ("action": "closed").
 - Fields to extract and include in the resulting action.
 
 Mapping for the MergePullRequest action is defined as follows:
@@ -115,7 +115,7 @@ Mapping for the MergePullRequest action is defined as follows:
 
 ##### 3. Resulting Action
 
-The raw event is transformed into a structured action. Common fields (e.g., event_id, actor, repository) and action-specific details (e.g., pull_request metadata) are included:
+The raw event is transformed into a structured action. Common fields (e.g., event_id, actor, repository) and action-specific details (e.g., issue metadata) are included:
 
 ```json
 {
