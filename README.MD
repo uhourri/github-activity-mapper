@@ -466,14 +466,7 @@ Sample datasets are provided in the `data/` directory:
 - `sample-actions.jsonl`: Mapped actions.
 - `sample-activities.jsonl`: High-level activities.
 
-## Replication Details
-
-This package supports the replication of methodologies described in the associated research paper. The transformation process involves:
-
-1. **Event-to-Action Mapping**: Converting GitHub events into granular actions.
-2. **Action-to-Activity Mapping**: Grouping related actions into high-level activities.
-
-The provided notebooks and sample data demonstrate these steps in a transparent and reproducible manner.
+For the complete NumFocus dataset, including actions and activities spanning 21 months (January 2023 to September 2024) across 58 open-source projects, please refer to the [NumFocus Dataset on Zenodo](https://tinyurl.com/github-activity-dataset).
 
 ## Contributing
 
