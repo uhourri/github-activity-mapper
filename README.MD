@@ -84,8 +84,7 @@ Mapping for the MergePullRequest action is defined as follows:
 
 The raw event is transformed into a structured action. Common fields (e.g., event_id, actor, repository) and action-specific details (e.g., pull_request metadata) are included:
 
-```
-
+```json
 {
    "action":"CloseIssue",
    "event_id":"26170139709",
