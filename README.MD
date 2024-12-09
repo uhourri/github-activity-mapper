@@ -1,8 +1,10 @@
 # GitHub Activity Mapper
 
-This repository contains the **GitHub Activity Mapper**, a tool and associated data mappings for transforming raw GitHub event data into structured actions and high-level activities. This package serves as a replication resource for research purposes, specifically to support analyses of open-source software (OSS) collaboration.
+This repository provides the replication package for the mapping process detailed in the paper submitted to the Data and Tool Showcase Track of the Mining Software Repositories (MSR) 2025 conference.
 
-For the complete NumFocus dataset, including actions and activities spanning 21 months (January 2023 to September 2024) across 58 open-source projects, please refer to the [NumFocus Dataset on Zenodo](https://tinyurl.com/github-activity-dataset).
+For access to the **NumFocus Dataset**, which includes 21 months of data (January 2023 to September 2024) from 58 open-source projects, visit [NumFocus Dataset on Zenodo](https://tinyurl.com/github-activity-dataset).
+
+The Python-based command-line tool **ghmap**, which facilitates this mapping process, is available in a separate repository: [ghmap](https://github.com/uhourri/ghmap).
 
 ## Repository Structure
 
